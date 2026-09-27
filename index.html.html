@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DESPOJO | Infancias en Dictadura</title>
+
+    <style>
+        /* =========================
+           01. IDENTIDAD VISUAL
+        ========================= */
+
+        :root {
+            --negro: #171715;
+            --papel: #e8e1d5;
+            --blanco: #f5f0e7;
+            --rojo: #8f302b;
+            --gris: #777064;
+            --linea: rgba(232, 225, 213, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--negro);
+            color: var(--papel);
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .sans {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .etiqueta {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .contenedor {
+            width: min(1100px, 88%);
+            margin: auto;
+        }
+
+        /* =========================
+           02. NAVEGACIÓN
+        ========================= */
+
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--linea);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .marca {
+            font-size: 19px;
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: #c56b60;
+        }
+
+        /* =========================
+           03. PORTADA
+        ========================= */
+
+        .portada {
+            min-height: 680px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+            border-bottom: 1px solid var(--linea);
+        }
+
+        .portada::before {
+            content: "";
+            position: absolute;
+            width: 460px;
+            height: 580px;
+            right: 5%;
+            top: 8%;
+            border: 1px solid rgba(232, 225, 213, 0.12);
+            transform: rotate(8deg);
+        }
+
+        .portada::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 400px;
+            right: 15%;
+            top: 23%;
+            background: var(--rojo);
+            opacity: 0.12;
+            transform: rotate(-9deg);
+        }
+
+        .portada-contenido {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+        }
+
+        .portada .etiqueta {
+            color: #b9afa0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: clamp(70px, 13vw, 150px);
+            line-height: 0.9;
+            letter-spacing: -7px;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+
+        .subtitulo {
+            font-size: clamp(23px, 4vw, 38px);
+            color: #c8bfb1;
+            font-weight: normal;
+            margin-bottom: 35px;
+        }
+
+        .portada-texto {
+            max-width: 490px;
+            color: #b9b1a5;
+            font-size: 16px;
+            margin-bottom: 38px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 14px 25px;
+            background: var(--rojo);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background: #aa443b;
+            transform: translateY(-3px);
+        }
+
+        .numero-portada {
+            position: absolute;
+            right: 0;
+            bottom: 35px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: var(--gris);
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           04. INTRODUCCIÓN
+        ========================= */
+
+        .introduccion {
+            background: var(--papel);
+            color: var(--negro);
+            padding: 110px 0;
+        }
+
+        .introduccion-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 70px;
+        }
+
+        .introduccion .etiqueta {
+            color: var(--rojo);
+        }
+
+        .introduccion h2 {
+            font-size: clamp(32px, 5vw, 58px);
+            font-weight: normal;
+            line-height: 1.15;
+            margin-bottom: 30px;
+        }
+
+        .introduccion p {
+            font-size: 17px;
+            margin-bottom: 20px;
+            color: #49453f;
+        }
+
+        .frase {
+            margin-top: 35px;
+            padding-left: 22px;
+            border-left: 3px solid var(--rojo);
+            font-size: 22px;
+            font-style: italic;
+        }
+
+        /* =========================
+           05. LOS TRES DESPOJOS
+        ========================= */
+
+        .capitulos {
+            padding: 110px 0;
+        }
+
+        .encabezado-seccion {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 55px;
+        }
+
+        .encabezado-seccion h2 {
+            font-size: clamp(36px, 6vw, 65px);
+            font-weight: normal;
+            line-height: 1.1;
+            margin-top: 15px;
+        }
+
+        .encabezado-seccion p {
+            max-width: 280px;
+            color: #aaa195;
+            font-size: 14px;
+        }
+
+        .capitulo {
+            display: grid;
+            grid-template-columns: 100px 1fr 40px;
+            align-items: center;
+            gap: 25px;
+            padding: 35px 0;
+            border-top: 1px solid var(--linea);
+            transition: 0.3s;
+        }
+
+        .capitulo:last-child {
+            border-bottom: 1px solid var(--linea);
+        }
+
+        .capitulo:hover {
+            padding-left: 15px;
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .capitulo-numero {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #b56b61;
+            letter-spacing: 2px;
+        }
+
+        .capitulo h3 {
+            font-size: clamp(25px, 4vw, 40px);
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .capitulo p {
+            max-width: 620px;
+            color: #aaa195;
+            font-size: 14px;
+        }
+
+        .flecha {
+            font-size: 25px;
+            color: #b56b61;
+        }
+
+        /* =========================
+           06. PROPUESTA PERSUASIVA
+        ========================= */
+
+        .propuesta {
+            background: var(--rojo);
+            padding: 110px 0;
+            color: #fff3e9;
+        }
+
+        .propuesta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .propuesta h2 {
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 1.05;
+            font-weight: normal;
+            margin: 25px 0;
+        }
+
+        .propuesta p {
+            font-size: 16px;
+            color: #f0d9d0;
+            margin-bottom: 20px;
+        }
+
+        .propuesta .etiqueta {
+            color: #e9b8ad;
+        }
+
+        .argumento {
+            border-top: 1px solid rgba(255,255,255,0.35);
+            padding: 22px 0;
+        }
+
+        .argumento h3 {
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .argumento p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* =========================
+           07. EXPERIENCIA EDITORIAL
+        ========================= */
+
+        .experiencia {
+            padding: 110px 0;
+            background: #22221f;
+        }
+
+        .experiencia h2 {
+            font-size: clamp(35px, 5vw, 60px);
+            font-weight: normal;
+            margin: 20px 0;
+        }
+
+        .experiencia-intro {
+            max-width: 620px;
+            color: #b9b1a5;
+            margin-bottom: 50px;
+        }
+
+        .principios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .principio {
+            padding-top: 20px;
+            border-top: 1px solid var(--linea);
+        }
+
+        .principio .etiqueta {
+            color: #b56b61;
+        }
+
+        .principio h3 {
+            font-size: 23px;
+            font-weight: normal;
+            margin: 15px 0;
+        }
+
+        .principio p {
+            color: #aaa195;
+            font-size: 14px;
+        }
+
+        /* =========================
+           08. CIERRE
+        ========================= */
+
+        .cierre {
+            text-align: center;
+            padding: 130px 0;
+            background: var(--papel);
+            color: var(--negro);
+        }
+
+        .cierre h2 {
+            font-size: clamp(40px, 7vw, 85px);
+            font-weight: normal;
+            line-height: 1.05;
+            margin: 25px auto;
+            max-width: 850px;
+        }
+
+        .cierre p {
+            max-width: 550px;
+            margin: 0 auto 35px;
+            color: #5b554c;
+        }
+
+        .cierre .boton {
+            background: var(--negro);
+        }
+
+        .cierre .boton:hover {
+            background: var(--rojo);
+        }
+
+        /* =========================
+           09. PIE DE PÁGINA
+        ========================= */
+
+        footer {
+            padding: 35px 0;
+            background: var(--negro);
+        }
+
+        .footer-contenido {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        footer p {
+            color: #948c80;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .footer-marca {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: var(--papel);
+        }
+
+        /* =========================
+           10. DISEÑO RESPONSIVO
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                gap: 12px;
+                font-size: 9px;
+            }
+
+            .marca {
+                font-size: 15px;
+            }
+
+            .portada {
+                min-height: 590px;
+            }
+
+            h1 {
+                letter-spacing: -4px;
+            }
+
+            .portada::before {
+                right: -180px;
+            }
+
+            .portada::after {
+                right: -80px;
+            }
+
+            .introduccion-grid,
+            .propuesta-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .encabezado-seccion {
+                display: block;
+            }
+
+            .encabezado-seccion p {
+                margin-top: 20px;
+            }
+
+            .capitulo {
+                grid-template-columns: 45px 1fr 20px;
+                gap: 12px;
+            }
+
+            .principios {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-contenido {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVEGACIÓN -->
+
+    <header>
+        <div class="contenedor">
+            <nav>
+                <a href="#inicio" class="marca">DESPOJO.</a>
+
+                <ul class="nav-links">
+                    <li><a href="#libro">El libro</a></li>
+                    <li><a href="#capitulos">Capítulos</a></li>
+                    <li><a href="#propuesta">La propuesta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- PORTADA -->
+
+    <main>
+
+        <section class="portada" id="inicio">
+            <div class="contenedor">
+                <div class="portada-contenido">
+
+                    <p class="etiqueta">
+                        Relatos de dictadura · Chile
+                    </p>
+
+                    <h1>DESPOJO</h1>
+
+                    <h2 class="subtitulo">
+                        Infancias en Dictadura
+                    </h2>
+
+                    <p class="portada-texto">
+                        Hay infancias que crecieron entre ausencias,
+                        silencios y preguntas sin respuesta.
+                        Esta es una invitación a escuchar sus historias
+                        y reconstruir una memoria que todavía permanece.
+                    </p>
+
+                    <a href="#libro" class="boton">
+                        Descubrir el libro ↘
+                    </a>
+
+                </div>
+
+                <span class="numero-portada">
+                    SANTIAGO DE CHILE / 2026
+                </span>
+            </div>
+        </section>
+
+
+        <!-- PRESENTACIÓN DEL LIBRO -->
+
+        <section class="introduccion" id="libro">
+            <div class="contenedor introduccion-grid">
+
+                <div>
+                    <p class="etiqueta">01 / El proyecto</p>
+                </div>
+
+                <div>
+                    <h2>
+                        La historia también se cuenta
+                        desde quienes eran niños.
+                    </h2>
+
+                    <p>
+                        La historia suele recordarse a través de
+                        fechas, acontecimientos y cifras. Sin embargo,
+                        detrás de cada hecho existen vidas que fueron
+                        transformadas para siempre.
+                    </p>
+
+                    <p>
+                        <strong>Despojo: Infancias en Dictadura</strong>
+                        reúne testimonios y documentos que permiten
+                        aproximarse a las experiencias de niños y niñas
+                        durante la dictadura militar en Chile.
+                    </p>
+
+                    <p>
+                        A través de relatos, archivos y fragmentos,
+                        el libro aborda la pérdida de identidad,
+                        la separación familiar y las huellas que
+                        la violencia dejó en la vida cotidiana.
+                    </p>
+
+                    <div class="frase">
+                        Recordar es también devolverles
+                        un lugar a quienes fueron silenciados.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- LOS TRES CAPÍTULOS -->
+
+        <section class="capitulos" id="capitulos">
+            <div class="contenedor">
+
+                <div class="encabezado-seccion">
+                    <div>
+                        <p class="etiqueta">02 / Contenido</p>
+                        <h2>Tres formas<br>de despojo.</h2>
+                    </div>
+
+                    <p>
+                        Tres dimensiones de una misma herida:
+                        la identidad, los vínculos y la tranquilidad
+                        de una infancia atravesada por la violencia.
+                    </p>
+                </div>
+
+
+                <article class="capitulo">
+                    <span class="capitulo-numero">01</span>
+
+                    <div>
+                        <h3>Despojo de Identidad</h3>
+                        <p>
+                            Historias de niños y niñas separados
+                            de sus orígenes, de sus familias y del
+                            derecho a conocer su propia historia.
+                        </p>
+                    </div>
+
+                    <span class="flecha">↗</span>
+                </article>
+
+
+                <article class="capitulo">
+                    <span class="capitulo-numero">02</span>
+
+                    <div>
+                        <h3>Despojo del Vínculo</h3>
+                        <p>
+                            La desaparición y la pérdida de padres
+                            y madres, y las infancias marcadas por
+                            la espera, el silencio y la ausencia.
+                        </p>
+                    </div>
+
+                    <span class="flecha">↗</span>
+                </article>
+
+
+                <article class="capitulo">
+                    <span class="capitulo-numero">03</span>
+
+                    <div>
+                        <h3>Despojo de la Calma</h3>
+                        <p>
+                            El miedo, la incertidumbre y las
+                            consecuencias de crecer en un entorno
+                            atravesado por la represión.
+                        </p>
+                    </div>
+
+                    <span class="flecha">↗</span>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- ARGUMENTO PERSUASIVO -->
+
+        <section class="propuesta" id="propuesta">
+            <div class="contenedor propuesta-grid">
+
+                <div>
+                    <p class="etiqueta">03 / ¿Por qué leerlo?</p>
+
+                    <h2>
+                        Porque ninguna infancia
+                        debería quedar
+                        en el olvido.
+                    </h2>
+
+                    <p>
+                        Leer Despojo es acercarse a una dimensión
+                        de la historia que merece ser escuchada.
+                        Es reconocer que la memoria no se construye
+                        únicamente con acontecimientos, sino también
+                        con las experiencias de quienes los vivieron.
+                    </p>
+
+                    <p>
+                        Cada testimonio, documento y fragmento
+                        contribuye a preservar historias que
+                        necesitan ser conocidas por las nuevas
+                        generaciones.
+                    </p>
+                </div>
+
+
+                <div>
+                    <div class="argumento">
+                        <h3>Una memoria que da voz</h3>
+                        <p>
+                            Recupera experiencias de infancia que
+                            permiten comprender el impacto humano
+                            de la dictadura.
+                        </p>
+                    </div>
+
+                    <div class="argumento">
+                        <h3>Una historia que interpela</h3>
+                        <p>
+                            Invita a reflexionar sobre la identidad,
+                            los vínculos familiares y las consecuencias
+                            de la violencia de Estado.
+                        </p>
+                    </div>
+
+                    <div class="argumento">
+                        <h3>Un archivo para el futuro</h3>
+                        <p>
+                            Reúne relatos y documentos como parte
+                            de un ejercicio de memoria colectiva
+                            y reparación simbólica.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CONCEPTO EDITORIAL -->
+
+        <section class="experiencia">
+            <div class="contenedor">
+
+                <p class="etiqueta">04 / La experiencia editorial</p>
+
+                <h2>
+                    Una memoria<br>
+                    hecha de fragmentos.
+                </h2>
+
+                <p class="experiencia-intro">
+                    La propuesta gráfica de Despojo dialoga con
+                    la naturaleza fragmentada de la memoria.
+                    Las rupturas, las imágenes y los espacios
+                    vacíos forman parte de una narración visual
+                    que invita a reconstruir lo perdido.
+                </p>
+
+                <div class="principios">
+
+                    <article class="principio">
+                        <p class="etiqueta">01 / Fragmentación</p>
+                        <h3>Lo que falta</h3>
+                        <p>
+                            Los fragmentos y las rupturas evocan
+                            una historia que no siempre puede
+                            reconstruirse por completo.
+                        </p>
+                    </article>
+
+                    <article class="principio">
+                        <p class="etiqueta">02 / Archivo</p>
+                        <h3>Lo que permanece</h3>
+                        <p>
+                            Los testimonios y documentos
+                            conservan las huellas de una
+                            memoria que se resiste al olvido.
+                        </p>
+                    </article>
+
+                    <article class="principio">
+                        <p class="etiqueta">03 / Reconstrucción</p>
+                        <h3>Lo que buscamos</h3>
+                        <p>
+                            Cada relato abre la posibilidad
+                            de recuperar una parte de la
+                            historia y devolverle su voz.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CIERRE PERSUASIVO -->
+
+        <section class="cierre">
+            <div class="contenedor">
+
+                <p class="etiqueta">Despojo / Infancias en Dictadura</p>
+
+                <h2>
+                    Conocer estas historias
+                    también es una forma
+                    de recordar.
+                </h2>
+
+                <p>
+                    Abrir este libro es escuchar a quienes
+                    crecieron entre ausencias. Es mirar
+                    nuestra historia desde sus experiencias
+                    y reconocer que la memoria sigue siendo
+                    una tarea del presente.
+                </p>
+
+                <a href="#inicio" class="boton">
+                    Volver al comienzo ↑
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+        <div class="contenedor footer-contenido">
+
+            <span class="footer-marca">DESPOJO.</span>
+
+            <p>
+                SOFÍA OJEDA · BELÉN ZUÑIGA
+            </p>
+
+            <p>
+                TALLER CONCRETO / 2026
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+</html>
